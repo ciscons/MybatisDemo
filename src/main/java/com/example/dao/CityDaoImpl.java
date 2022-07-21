@@ -10,20 +10,18 @@ import com.example.vo.CityVo;
 
 @Repository("cityDao")
 public class CityDaoImpl implements CityDao {
-	
-//	@Autowired
-//	private SqlSession sqlSession;
 
+	@Autowired
+	private SqlSession sqlSession;
+	
 	@Override
 	public CityVo read(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectOne("City.selectCity", name);
 	}
 
 	@Override
-	public List<CityVo> readAll(String countyCode) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CityVo> readAll(String countryCode) {
+		return this.sqlSession.selectList("City.selectCitiesByCountryCode", countryCode);
 	}
 
 }

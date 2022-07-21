@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="City">
+	<resultMap type="cityVo" id="cityResultMap">
+		<result property="id" column="ID" javaType="int" jdbcType="INTEGER"/>
+		<result property="name" column="Name" javaType="String" jdbcType="CHAR"/>
+		<result property="countryCode" column="CountryCode" javaType="String" jdbcType="CHAR"/>
+		<result property="district" column="District" javaType="String" jdbcType="CHAR"/>
+		<result property="population" column="Population" javaType="int" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<select id="selectCity" parameterType="String" resultType="cityVo" resultMap="cityResultMap">
+		SELECT ID, Name, CountryCode, District, Population
+		FROM city WHERE Name = #{name}
+	</select>
+	
+	<select id="selectCitiesByCountryCode" parameterType="String" resultType="cityVo" 
+		resultMap="cityResultMap">
+		SELECT * FROM city WHERE CountryCode = #{countryCode} ORDER BY Population DESC
+	</select>
+</mapper>
